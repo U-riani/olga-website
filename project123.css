@@ -6,18 +6,18 @@
 
 body {
   width: 100%;
-  background-color: rgb(254, 246, 237);
+  /* background-color: rgb(254, 246, 237); */
 }
 
 header {
   width: 100%;
   height: 167px;
-  background-color: rgb(254, 246, 237);
+  /* background-color: rgb(254, 246, 237); */
 }
 
 .nav-logo-container {
   width: 100%;
-  background-color: rgb(254, 246, 237);
+  /* background-color: rgb(254, 246, 237); */
   padding-bottom: 25px;
 }
 
@@ -220,9 +220,9 @@ img {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: rgb(75, 94, 82);
+  /* background-color: rgb(75, 94, 82); */
   width: 90vh;
-  height: 90vh;
+  /* height: 90vh; */
   opacity: 1;
 }
 

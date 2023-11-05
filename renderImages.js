@@ -28,13 +28,6 @@ export class App {
   // Create photos
   createPhotos(imagePlaceholder, imgPath) {
     const globalClass = this;
-
-    // const img = new Image();
-    // img.src = imgPath;
-    // img.onload = function() {
-    //   globalClass.removeStarterTitle();
-    //   imagePlaceholder.append(img);
-    // }
     return new Promise(function (resolve, reject) {
       const img = document.createElement("img");
       img.src = imgPath;
@@ -45,7 +38,7 @@ export class App {
         resolve(img);
       });
 
-      img.addEventListener("load", function () {
+      img.addEventListener("error", function () {
         reject(new Error("image not found"));
       });
     });
@@ -60,8 +53,8 @@ export class App {
     });
   }
 
-  createMobPhotosContainer(counter = 0) {
-    for (let i = counter + 1; i <= counter + 10; i++) {
+  createMobPhotosContainer() {
+    for (let i = counter + 1; i <= 10; i++) {
       this.createElem("div", `.mobile-container`, `image-placeholder`, `${i}`);
     }
     const containersArr = document.querySelectorAll(".image-placeholder");
@@ -72,13 +65,11 @@ export class App {
 
   //create div containers and add class for pad and compiuter
   createDivContainersForImg(
-    num,
     columnName,
-    counter,
-    starterI = 10,
-    increaseI = 2
+    increaseI = 2,
+    starterI = 1
   ) {
-    for (let i = counter + num; i <= counter + starterI; i += increaseI) {
+    for (let i = starterI; i <= 10; i += increaseI) {
       this.createElem(
         "div",
         `.${columnName}`,
@@ -130,7 +121,7 @@ export class App {
     headerObs.observe(header);
   }
 
-  loadImagesMobile(maxPhotos) {
+  loadImagesMobile() {
     if (pageWidth <= 700) {
       // create main div container for mob version
       this.createElem("div", ".photo-container", "mobile-container", 0);
@@ -140,39 +131,11 @@ export class App {
 
       // load photos in each images container for first 10 images
       this.loadImages();
-
-      // intersectionObserver for load images
-      const obsCallback = (entries, observer) => {
-        const [entry] = entries;
-
-        if (!entry.isIntersecting) return;
-
-        counter += 10;
-        this.createMobPhotosContainer(counter);
-
-        this.loadImages();
-
-        if (counter >= maxPhotos) {
-          loadMoreObserver.unobserve(footer);
-        }
-      };
-
-      const obsOptions = {
-        root: null,
-        threshold: 0.9,
-      };
-
-      const loadMoreObserver = new IntersectionObserver(
-        obsCallback,
-        obsOptions
-      );
-
-      loadMoreObserver.observe(footer);
     }
   }
 
-  loadImagesTest(counter = 0, maxI = 10) {
-    for (let i = counter + 1; i <= counter + maxI; i++) {
+  loadImagesTest() {
+    for (let i = 1; i <= 10; i++) {
       this.createPhotos(
         document.querySelector(`.column-placeholder-${i}`),
         `${this.imagesFile}/${i}.jpg`
@@ -187,7 +150,7 @@ export class App {
     newElem.dataset.num = data;
   }
 
-  loadImagesPad(maxPhotos) {
+  loadImagesPad() {
     if (pageWidth > 700 && pageWidth < 1000) {
       // create column containers
       this.createElem("div", ".photo-container", "pad-container", "0");
@@ -197,35 +160,10 @@ export class App {
       this.createElem("div", ".pad-container", "column--2", "2");
 
       //create photo conatiners in column 1 and column 2
-      this.createDivContainersForImg(1, "column--1", 0);
-      this.createDivContainersForImg(2, "column--2", 0);
+      this.createDivContainersForImg("column--1", 2, 1);
+      this.createDivContainersForImg("column--2", 2, 2);
 
       this.loadImagesTest();
-
-      // Intersecting observer for load more photos
-      const obsPadObs = (entries, observer) => {
-        const [entry] = entries;
-
-        if (!entry.isIntersecting) return;
-
-        counter += 10;
-        this.createDivContainersForImg(1, "column--1", counter);
-        this.createDivContainersForImg(2, "column--2", counter);
-
-        this.loadImagesTest(counter);
-
-        if (counter >= maxPhotos) {
-          padObserver.unobserve(footer);
-        }
-      };
-
-      const obsOpt = {
-        root: null,
-        threshold: 0.5,
-      };
-
-      const padObserver = new IntersectionObserver(obsPadObs, obsOpt);
-      padObserver.observe(footer);
     }
   }
 
@@ -241,37 +179,12 @@ export class App {
       this.createElem("div", ".comp-container", "column--3", 0.3);
 
       // Create photo containers in columns
-      this.createDivContainersForImg(1, "column--1", 0, 12, 3);
-      this.createDivContainersForImg(2, "column--2", 0, 12, 3);
-      this.createDivContainersForImg(3, "column--3", 0, 12, 3);
+      this.createDivContainersForImg("column--1", 3, 1);
+      this.createDivContainersForImg("column--2", 3, 2);
+      this.createDivContainersForImg("column--3", 3, 3);
 
       this.loadImagesTest(0, 12);
 
-      // Intersecting observer for load more photos
-      const obsComp = (entries, observer) => {
-        const [entry] = entries;
-
-        if (!entry.isIntersecting) return;
-
-        counter += 12;
-        this.createDivContainersForImg(1, "column--1", counter, 12, 3);
-        this.createDivContainersForImg(2, "column--2", counter, 12, 3);
-        this.createDivContainersForImg(3, "column--3", counter, 12, 3);
-
-        this.loadImagesTest(counter, 12);
-
-        if (counter >= maxPhotos) {
-          compObserver.unobserve(footer);
-        }
-      };
-
-      const obsOpt = {
-        root: null,
-        threshold: 0.5,
-      };
-
-      const compObserver = new IntersectionObserver(obsComp, obsOpt);
-      compObserver.observe(footer);
     }
   }
 }

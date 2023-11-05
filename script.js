@@ -1,10 +1,12 @@
-import { App } from "./renderImages.js";
-import { imagePopup } from "./imagePopup.js";
+import {App} from './renderImages.js';
+const projectsPage = new App();
 
+document.querySelectorAll('.photo-container').forEach(function(el, i) {
+    projectsPage.createPhotos(el, `/imagesCompress-${i + 1}/${1}.jpg`);
+})
 
-imagePopup();
-const mainPage = new App('images');
-mainPage.loadImagesMobile(30);
-mainPage.loadImagesPad(40);
-mainPage.loadImagesComp(36);
-mainPage.revealNavMenu();
+document.querySelectorAll('.projects').forEach(function(e) {
+    e.addEventListener('click', function() {
+        
+    })
+})
