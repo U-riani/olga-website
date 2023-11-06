@@ -5,8 +5,9 @@ const footer = document.querySelector("footer");
 let counter = 0;
 
 export class App {
-  constructor(imagesFile) {
+  constructor(imagesFile, project1, project2, project3) {
     this.imagesFile = imagesFile;
+
     // this.loadImagesMobile();
     // this.loadImagesPad();
     // this.loadImagesComp();
@@ -27,6 +28,14 @@ export class App {
 
   // Create photos
   createPhotos(imagePlaceholder, imgPath) {
+    // const img = new Image();
+    // img.src = imgPath;
+    // imagePlaceholder.append(img);
+    // img.onload = ()=> {
+
+    //   return img
+    // }
+
     const globalClass = this;
     return new Promise(function (resolve, reject) {
       const img = document.createElement("img");

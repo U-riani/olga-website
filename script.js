@@ -1,8 +1,8 @@
 import {App} from './renderImages.js';
-const projectsPage = new App();
+const projectsPage = new App(`main`);
 
 document.querySelectorAll('.photo-container').forEach(function(el, i) {
-    projectsPage.createPhotos(el, `/imagesCompress-${i + 1}/${1}.jpg`);
+    projectsPage.createPhotos(el, `main/${i + 1}.jpg`);
 })
 
 document.querySelectorAll('.projects').forEach(function(e) {
