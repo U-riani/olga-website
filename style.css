@@ -139,7 +139,7 @@ main {
 
   main {
     display: grid;
-    grid-template: 150px / auto auto auto;
+    grid-template: 150px / auto auto auto auto auto;
     justify-content: stretch;
   }
 
