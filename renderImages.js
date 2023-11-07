@@ -53,14 +53,14 @@ export class App {
     });
   }
 
-  // Load images in first 10 containers
-  loadImages() {
-    const mobVersCont = document.querySelectorAll(".image-placeholder");
-    mobVersCont.forEach(async (elem, i) => {
-      if (elem.childNodes.length > 0) return;
-      await this.createPhotos(elem, `/${this.imagesFile}/${i + 1}.jpg`);
-    });
-  }
+  // // Load images in first 10 containers
+  // loadImages() {
+  //   const mobVersCont = document.querySelectorAll(".image-placeholder");
+  //   mobVersCont.forEach(async (elem, i) => {
+  //     if (elem.childNodes.length > 0) return;
+  //     await this.createPhotos(elem, `/${this.imagesFile}/${i + 1}.jpg`);
+  //   });
+  // }
 
   createMobPhotosContainer() {
     for (let i = counter + 1; i <= 10; i++) {
@@ -139,14 +139,14 @@ export class App {
       this.createMobPhotosContainer();
 
       // load photos in each images container for first 10 images
-      this.loadImages();
+      this.loadImages('image-placeholder-');
     }
   }
 
-  loadImagesTest() {
+  loadImages(parentElem) {
     for (let i = 1; i <= 10; i++) {
       this.createPhotos(
-        document.querySelector(`.column-placeholder-${i}`),
+        document.querySelector(`.${parentElem}-${i}`),
         `${this.imagesFile}/${i}.jpg`
       );
     }
@@ -172,7 +172,7 @@ export class App {
       this.createDivContainersForImg("column--1", 2, 1);
       this.createDivContainersForImg("column--2", 2, 2);
 
-      this.loadImagesTest();
+      this.loadImages('column-placeholder');
     }
   }
 
@@ -192,7 +192,7 @@ export class App {
       this.createDivContainersForImg("column--2", 3, 2);
       this.createDivContainersForImg("column--3", 3, 3);
 
-      this.loadImagesTest(0, 12);
+      this.loadImages('column-placeholder');
 
     }
   }

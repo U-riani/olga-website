@@ -136,16 +136,15 @@ main {
   .navigation li a {
     font-size: 2rem;
   }
-
+ 
   main {
     display: grid;
-    grid-template: 150px / auto auto auto auto auto;
+    grid-template: 400px 400px / auto auto auto;
     justify-content: stretch;
   }
 
   .projects {
     min-height: 400px;
   }
-
 
 }
