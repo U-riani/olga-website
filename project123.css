@@ -11,14 +11,14 @@ body {
 
 header {
   width: 100%;
-  height: 167px;
+  height: 100px;
   /* background-color: rgb(254, 246, 237); */
 }
 
 .nav-logo-container {
   width: 100%;
   background-color: rgb(250, 250, 250);
-  padding-bottom: 25px;
+  padding-bottom: 15px;
 }
 
 .logo-container {
@@ -30,8 +30,15 @@ header {
   padding: 10px 0;
 }
 
+.navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
 .navigation li {
   text-align: center;
+  list-style-type: none;
 }
 
 a {
@@ -288,12 +295,12 @@ i {
 
 @media screen and (min-width: 700px) {
   header {
-    height: 250px;
+    height: 180px;
   }
 
   .nav-logo-container {
     width: 100%;
-    height: 250px;
+    height: 180px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
