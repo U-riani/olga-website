@@ -62,8 +62,8 @@ export class App {
   //   });
   // }
 
-  createMobPhotosContainer() {
-    for (let i = counter + 1; i <= 10; i++) {
+  createMobPhotosContainer(maxI = 10) {
+    for (let i = counter + 1; i <= maxI; i++) {
       this.createElem("div", `.mobile-container`, `image-placeholder`, `${i}`);
     }
     const containersArr = document.querySelectorAll(".image-placeholder");
@@ -76,9 +76,10 @@ export class App {
   createDivContainersForImg(
     columnName,
     increaseI = 2,
-    starterI = 1
+    starterI = 1,
+    maxI = 10
   ) {
-    for (let i = starterI; i <= 10; i += increaseI) {
+    for (let i = starterI; i <= maxI; i += increaseI) {
       this.createElem(
         "div",
         `.${columnName}`,
@@ -130,21 +131,21 @@ export class App {
     headerObs.observe(header);
   }
 
-  loadImagesMobile() {
+  loadImagesMobile(maxPhotos = 10) {
     if (pageWidth <= 700) {
       // create main div container for mob version
       this.createElem("div", ".photo-container", "mobile-container", 0);
 
       // create containers for each images for mobile
-      this.createMobPhotosContainer();
+      this.createMobPhotosContainer(maxPhotos);
 
       // load photos in each images container for first 10 images
-      this.loadImages('image-placeholder-');
+      this.loadImages('image-placeholder-', maxPhotos);
     }
   }
 
-  loadImages(parentElem) {
-    for (let i = 1; i <= 10; i++) {
+  loadImages(parentElem, maxI = 10) {
+    for (let i = 1; i <= maxI; i++) {
       this.createPhotos(
         document.querySelector(`.${parentElem}-${i}`),
         `${this.imagesFile}/${i}.jpg`
@@ -159,7 +160,7 @@ export class App {
     newElem.dataset.num = data;
   }
 
-  loadImagesPad() {
+  loadImagesPad(maxPhotos = 10) {
     if (pageWidth > 700 && pageWidth < 1000) {
       // create column containers
       this.createElem("div", ".photo-container", "pad-container", "0");
@@ -169,10 +170,10 @@ export class App {
       this.createElem("div", ".pad-container", "column--2", "2");
 
       //create photo conatiners in column 1 and column 2
-      this.createDivContainersForImg("column--1", 2, 1);
-      this.createDivContainersForImg("column--2", 2, 2);
+      this.createDivContainersForImg("column--1", 2, 1, maxPhotos);
+      this.createDivContainersForImg("column--2", 2, 2, maxPhotos);
 
-      this.loadImages('column-placeholder');
+      this.loadImages('column-placeholder', maxPhotos);
     }
   }
 
@@ -188,11 +189,11 @@ export class App {
       this.createElem("div", ".comp-container", "column--3", 0.3);
 
       // Create photo containers in columns
-      this.createDivContainersForImg("column--1", 3, 1);
-      this.createDivContainersForImg("column--2", 3, 2);
-      this.createDivContainersForImg("column--3", 3, 3);
+      this.createDivContainersForImg("column--1", 3, 1, maxPhotos);
+      this.createDivContainersForImg("column--2", 3, 2, maxPhotos);
+      this.createDivContainersForImg("column--3", 3, 3, maxPhotos);
 
-      this.loadImages('column-placeholder');
+      this.loadImages('column-placeholder', maxPhotos);
 
     }
   }
